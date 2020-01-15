@@ -1,2 +1,4 @@
-# horus
-Experiments with variational inference
+# Horus - A Project on Variational Inference
+
+Current implementations: 
+* Variational Auto-Encoder
