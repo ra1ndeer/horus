@@ -20,7 +20,7 @@ class VAE(nn.Module):
         self.hidden2output = nn.Linear(self.hidden_size, self.input_size)
 
     def encode(self, x):
-        h = torch.tanh(self.input_size(x))
+        h = torch.tanh(self.input2hidden(x))
         return self.hidden2mu(h), self.hidden2logvar(h)
 
     def decode(self, z):
