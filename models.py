@@ -63,9 +63,9 @@ class NormalizingFlow(nn.Module):
         self.flow_type = flow_type 
 
         if self.flow_type == "p":
-            self.flow = nn.ModuleList([PlanarTransform(self.input_size) for _ in range(self.flow_type)])
+            self.flow = nn.ModuleList([PlanarTransform(self.input_size) for _ in range(self.flow_size)])
         elif self.flow_type == "r":
-            self.flow = nn.ModuleList([RadialTransform(self.input_size) for _ in range(self.flow_type)])
+            self.flow = nn.ModuleList([RadialTransform(self.input_size) for _ in range(self.flow_size)])
         else:
             raise NotImplementedError("Not an available transformation.")
 
@@ -106,7 +106,7 @@ class VAE_NF(nn.Module):
 
     def decode(self, z):
         h = torch.tanh(self.latent2hidden(z))
-        return torch.sigmoid(self.hidden2output)
+        return torch.sigmoid(self.hidden2output(h))
 
     def reparametrize(self, mu, logvar):
         std = torch.exp(0.5*logvar)
